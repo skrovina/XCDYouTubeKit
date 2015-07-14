@@ -11,6 +11,8 @@
 NSString *const XCDMoviePlayerPlaybackDidFinishErrorUserInfoKey = @"error"; // documented in -[MPMoviePlayerController initWithContentURL:]
 
 NSString *const XCDYouTubeVideoPlayerViewControllerDidReceiveMetadataNotification = @"XCDYouTubeVideoPlayerViewControllerDidReceiveMetadataNotification";
+NSString *const XCDYouTubeVideoPlayerViewControllerWillAppear = @"XCDYouTubeVideoPlayerViewControllerWillAppear";
+NSString *const XCDYouTubeVideoPlayerViewControllerWillDisappear = @"XCDYouTubeVideoPlayerViewControllerWillDisappear";
 NSString *const XCDMetadataKeyTitle = @"Title";
 NSString *const XCDMetadataKeySmallThumbnailURL = @"SmallThumbnailURL";
 NSString *const XCDMetadataKeyMediumThumbnailURL = @"MediumThumbnailURL";
@@ -176,6 +178,7 @@ NSString *const XCDYouTubeVideoUserInfoKey = @"Video";
 
 - (void) viewWillAppear:(BOOL)animated
 {
+	[[NSNotificationCenter defaultCenter] postNotificationName:XCDYouTubeVideoPlayerViewControllerWillAppear object:self];
 	[super viewWillAppear:animated];
 	
 	if (![self isBeingPresented])
@@ -187,6 +190,7 @@ NSString *const XCDYouTubeVideoUserInfoKey = @"Video";
 
 - (void) viewWillDisappear:(BOOL)animated
 {
+	[[NSNotificationCenter defaultCenter] postNotificationName:XCDYouTubeVideoPlayerViewControllerWillDisappear object:self];
 	[super viewWillDisappear:animated];
 	
 	if (![self isBeingDismissed])
